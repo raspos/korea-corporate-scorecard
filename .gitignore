@@ -1,0 +1,6 @@
+# Never add local credentials or raw collector output.
+.env*
+DART_API_KEY
+raw_financials/
+*.log
+__pycache__/
