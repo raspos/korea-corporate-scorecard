@@ -8,6 +8,8 @@
 평가방법론/수집·품질 현황과 `site/docs/weight-validation-report.md`를 확인하세요.
 종합 현황의 종합점수는 두 지수가 모두 산출된 기업에 대해
 `CII × 0.5 + FSI × 0.5`로 계산한 100점 만점 점수입니다.
+수집 코드는 연결재무제표(CFS)를 요청하지만, 기존 원자료에는 요청 구분이 기록되지 않아
+기업·연도별 연결/별도 기준은 공시 원문 대조 전까지 미확인으로 표시합니다.
 
 원본 프로젝트에서 `python build_public_site.py`로 공개 파일만 다시 복사합니다.
 GitHub 저장소 Settings → Pages → Build and deployment → Source에서

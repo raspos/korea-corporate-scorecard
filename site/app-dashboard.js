@@ -1,5 +1,5 @@
 import {isNumber, scoreOf, filterCompanies, sortCompanies, pageCompanies, assetSizeGroup, assetSizeLabel, escapeHtml as h, makeCsv} from './ui-core.mjs?v=20261023size1';
-import {createImprovementUI} from './improvement-ui.mjs?v=20261024combined1';
+import {createImprovementUI} from './improvement-ui.mjs?v=20261024edition2';
 
 const $ = id => document.getElementById(id);
 const nf = new Intl.NumberFormat('ko-KR');
