@@ -6,6 +6,8 @@
 현재 CII·FSI는 **공시 원문·정정공시 검증 전 결과**입니다. 완전지표 기업의
 순위와 유형을 먼저 공개하며 검증 후 바뀔 수 있습니다. 자료·산식·결측 처리 및 검증 범위는 사이트의
 평가방법론/수집·품질 현황과 `site/docs/weight-validation-report.md`를 확인하세요.
+종합 현황의 종합점수는 두 지수가 모두 산출된 기업에 대해
+`CII × 0.5 + FSI × 0.5`로 계산한 100점 만점 점수입니다.
 
 원본 프로젝트에서 `python build_public_site.py`로 공개 파일만 다시 복사합니다.
 GitHub 저장소 Settings → Pages → Build and deployment → Source에서

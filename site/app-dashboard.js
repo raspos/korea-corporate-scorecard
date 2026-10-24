@@ -1,5 +1,5 @@
 import {isNumber, scoreOf, filterCompanies, sortCompanies, pageCompanies, assetSizeGroup, assetSizeLabel, escapeHtml as h, makeCsv} from './ui-core.mjs?v=20261023size1';
-import {createImprovementUI} from './improvement-ui.mjs?v=20261024release2';
+import {createImprovementUI} from './improvement-ui.mjs?v=20261024combined1';
 
 const $ = id => document.getElementById(id);
 const nf = new Intl.NumberFormat('ko-KR');
@@ -29,20 +29,20 @@ function toast(message) {
 }
 
 function showView(view, updateHash=true) {
-  if(!['overview','improvement','fsi','turnaround','map','rankings','insights','compare','methodology','validation','data'].includes(view)) view='overview';
+  if(!['overview','improvement','fsi','turnaround','map','insights','compare','methodology','validation','data'].includes(view)) view='overview';
   state.view=view;
-  text('current-view-title',({overview:'종합 현황',improvement:'모멘텀 랭킹',fsi:'재무체력 지수',turnaround:'턴어라운드',map:'기업 모멘텀 지도',rankings:'기존 참고평가',insights:'모멘텀 탐색',compare:'기업 맞대결',methodology:'평가방법론',validation:'모형 검증',data:'수집·품질 현황'})[view]);
+  text('current-view-title',({overview:'종합 현황',improvement:'모멘텀 지수(CII)',fsi:'재무체력 지수(FSI)',turnaround:'턴어라운드',map:'기업 모멘텀 지도',insights:'모멘텀 탐색',compare:'기업 맞대결',methodology:'평가방법론',validation:'모형 검증',data:'수집·품질 현황'})[view]);
   document.querySelectorAll('[id^="view-"]').forEach(el=>{el.hidden=el.id!==`view-${view}`;});
   document.querySelectorAll('[data-view]').forEach(el=>{
     const active=el.dataset.view===view; el.classList.toggle('active',active); el.classList.toggle('is-active',active);
     if(el.closest('nav')) {if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');}
   });
   if(updateHash)history.replaceState(null,'',`#${view}`);
-  if(view==='rankings')renderRankings(); if(view==='compare')renderComparison();
+  if(view==='compare')renderComparison();
   if(view==='insights')renderInsights(); if(view==='data')renderData();
   improvementUI.renderView(view);
   if(state.data) {
-    const legacy=['rankings','insights','compare','data'].includes(view);
+    const legacy=['insights','compare','data'].includes(view);
     text('data-status',legacy?'OpenDART · 참고평가':'OpenDART · 원문 검증 전');
     text('data-date',legacy?'2024 대비 2025':view==='fsi'?'2025':'2022~2025');
     const periodLabel=document.querySelector('label[for="year-select"]');
@@ -186,7 +186,7 @@ function radar(list){
 }
 function renderComparison(){
   html('compare-chips',state.compare.map((id,i)=>{const c=state.byId.get(id);return`<span class="compare-chip" style="--chip-color:${colors[i]}">${h(c.name)}<button data-remove-compare="${h(id)}" aria-label="${h(c.name)} 비교에서 제거">×</button></span>`;}).join(''));
-  const list=state.compare.map(id=>state.byId.get(id)).filter(Boolean);if(!list.length){html('comparison-content','<div class="empty-state"><h3>어떤 기업을 나란히 볼까요?</h3><p>위에서 기업을 검색하거나 순위표의 ＋ 버튼으로 최대 3개를 선택하세요.</p></div>');return;}
+  const list=state.compare.map(id=>state.byId.get(id)).filter(Boolean);if(!list.length){html('comparison-content','<div class="empty-state"><h3>어떤 기업을 나란히 볼까요?</h3><p>위 검색창에서 최대 3개 기업을 선택하세요.</p></div>');return;}
   const rows=[['시장',c=>c.market||'미확인'],['산업',c=>c.industry||'미확인'],['자산규모',c=>assetSizeLabel(c.size)],...Object.entries(labels).map(([k,v])=>[v,c=>score(c,k)]),['지표 충족률',c=>`${number(coverage(c),0)}%`],['2024 매출액',c=>`${money(c.series?.find(s=>s.year===2024)?.revenue)}원`],['2025 매출액',c=>`${money(c.series?.find(s=>s.year===2025)?.revenue)}원`],['매출 증가율(전년 대비)',c=>`${signed(metric(c,'revenue_growth'))}%`],['영업이익 개선(전기 매출 대비)',c=>`${signed(metric(c,'profit_improvement'))}%`],['부채비율 감소(전년 대비)',c=>`${signed(metric(c,'debt_reduction'))}%p`],['총자산',c=>`${money(c.series?.at(-1)?.assets)}원`],['영업이익률',c=>`${number(metric(c,'operating_margin'))}%`],['ROA',c=>`${number(metric(c,'roa'))}%`],['부채비율',c=>`${number(metric(c,'debt_ratio'))}%`]];
   html('comparison-content',`<div class="compare-layout"><section class="panel"><h3>부문별 참고점수</h3>${radar(list)}<div class="chart-legend">${list.map((c,i)=>`<span><i style="background:${colors[i]}"></i>${h(c.name)}</span>`).join('')}</div><p class="small-muted">모든 부문 값이 있는 기업만 다각형을 표시합니다. 서버에서 산출한 점수를 사용합니다.</p></section><section class="panel"><h3>같은 기준으로 나란히 보기</h3><div class="table-wrap"><table class="data-table compare-table"><thead><tr><th>항목</th>${list.map(c=>`<th>${companyButton(c)}</th>`).join('')}</tr></thead><tbody>${rows.map(([label,get])=>`<tr><td>${label}</td>${list.map(c=>`<td>${h(get(c))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section></div><p class="notice">${new Set(list.map(c=>c.industry)).size>1||new Set(list.map(c=>c.size)).size>1?'서로 다른 산업 또는 자산 그룹의 기업입니다. 비교집단 내 상대 성과와 지표 충족률을 함께 확인하세요.':'같은 산업·규모라도 연결 범위와 확보 지표가 다를 수 있습니다.'} 참고점수는 신용등급이나 미래 주가 전망을 뜻하지 않습니다.</p>`);
 }

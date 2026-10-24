@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;650;700;750&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261023momentum1">
-  <script src="app-dashboard.js?v=20261024release2" type="module" defer></script>
+  <script src="app-dashboard.js?v=20261024combined1" type="module" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#app-main">본문으로 이동</a>
@@ -46,11 +46,10 @@
     <div class="nav-label">기업을 보는 새로운 기준</div>
     <nav class="main-nav" aria-label="주요 페이지">
       <button class="nav-item is-active" data-view="overview" aria-current="page"><svg class="icon"><use href="#icon-grid"/></svg><span>종합 현황</span></button>
-      <button class="nav-item" data-view="improvement"><svg class="icon"><use href="#icon-ranking"/></svg><span>모멘텀 랭킹</span></button>
-      <button class="nav-item" data-view="fsi"><svg class="icon"><use href="#icon-ranking"/></svg><span>재무체력 지수</span></button>
-      <button class="nav-item" data-view="turnaround"><svg class="icon"><use href="#icon-spark"/></svg><span>턴어라운드</span></button>
+      <button class="nav-item" data-view="improvement"><svg class="icon"><use href="#icon-ranking"/></svg><span>모멘텀 지수(CII)</span></button>
+      <button class="nav-item" data-view="fsi"><svg class="icon"><use href="#icon-ranking"/></svg><span>재무체력 지수(FSI)</span></button>
       <button class="nav-item" data-view="map"><svg class="icon"><use href="#icon-grid"/></svg><span>기업 모멘텀 지도</span></button>
-      <button class="nav-item" data-view="rankings"><svg class="icon"><use href="#icon-ranking"/></svg><span>기존 참고평가</span></button>
+      <button class="nav-item" data-view="turnaround"><svg class="icon"><use href="#icon-spark"/></svg><span>턴어라운드</span></button>
       <button class="nav-item" data-view="insights"><svg class="icon"><use href="#icon-spark"/></svg><span>모멘텀 탐색</span></button>
       <button class="nav-item" data-view="compare"><svg class="icon"><use href="#icon-compare"/></svg><span>기업 맞대결</span></button>
       <div class="nav-divider"></div>
@@ -85,9 +84,7 @@
           <button class="text-button" data-view="methodology">평가는 어떻게 하나요? <svg class="icon"><use href="#icon-arrow-up"/></svg></button>
         </div>
 
-        <div class="assessment-note"><svg class="icon"><use href="#icon-info"/></svg><p><strong>순위 공개:</strong> 2022~2025년 CII와 2025년 FSI를 충족한 기업의 순위·유형을 먼저 공개합니다. 기업별 공시 원문·정정공시, 연결·별도 재무제표, 시장·업종 분류와 이상치 검증은 진행 전이며 결과가 바뀔 수 있습니다. 기존 2024~2025 참고평가는 별도 메뉴에 보존했습니다.</p><button class="text-button" data-view="data">수집 현황 <span aria-hidden="true">→</span></button></div>
-
-        <div class="period-row"><div class="period-tabs" aria-label="평가 기간"><button class="period-tab is-active" data-period="annual" aria-pressed="true">3년 모멘텀 평가 <span>2022~2025</span></button><button class="period-tab" data-period="quarterly" disabled title="최신 분기자료 수집 후 제공됩니다">2026 분기 참고 <span>수집 전</span></button></div><span class="small-muted">2026년 수치는 2025년 연간 평가에 포함하지 않습니다.</span></div>
+        <div class="assessment-note"><svg class="icon"><use href="#icon-info"/></svg><p><strong>평가 결과 공개:</strong> CII와 FSI가 모두 산출된 기업은 두 지수를 50:50으로 합친 종합점수도 제공합니다. 기업별 공시 원문·정정공시, 연결·별도 재무제표, 시장·업종 분류와 이상치 검증은 진행 전이며 결과가 바뀔 수 있습니다.</p><button class="text-button" data-view="data">수집 현황 <span aria-hidden="true">→</span></button></div>
 
         <div id="kpi-grid" class="kpi-grid" aria-label="주요 평가 현황"><article class="kpi-card"><span class="kpi-label">평가 현황</span><strong class="kpi-value">—</strong><span class="kpi-note">자료를 확인하고 있습니다</span></article></div>
 
@@ -100,14 +97,14 @@
           </article>
 
           <article class="panel leader-panel">
-            <div class="panel-heading"><div><div class="section-kicker">PERFORMANCE LEADERS</div><h2>모멘텀 지수 상위 기업</h2></div><button class="icon-button" data-view="improvement" aria-label="모멘텀 랭킹 전체 보기"><svg class="icon"><use href="#icon-arrow-up"/></svg></button></div>
-            <div class="leader-table-wrap"><table class="leader-table"><thead><tr><th scope="col">순위</th><th scope="col">기업</th><th scope="col">시장</th><th scope="col">점수</th><th scope="col">충족률</th><th scope="col">비교</th></tr></thead><tbody id="overview-ranking"><tr><td colspan="6" class="empty-cell">평가 결과를 불러오는 중입니다.</td></tr></tbody></table></div>
-            <div class="panel-footer"><span>완전지표 기업의 순위입니다. 원문 검증 후 변경될 수 있습니다.</span><button class="text-button" data-view="improvement">모멘텀 랭킹 보기 <span aria-hidden="true">→</span></button></div>
+            <div class="panel-heading"><div><div class="section-kicker">PERFORMANCE LEADERS</div><h2>CII + FSI 종합점수 상위 기업</h2></div><button class="icon-button" data-view="methodology" aria-label="종합점수 산식 보기"><svg class="icon"><use href="#icon-arrow-up"/></svg></button></div>
+            <div class="leader-table-wrap"><table class="leader-table"><thead><tr><th scope="col">순위</th><th scope="col">기업</th><th scope="col">업종</th><th scope="col">종합점수</th><th scope="col">CII</th><th scope="col">FSI</th><th scope="col">유형</th></tr></thead><tbody id="overview-ranking"><tr><td colspan="7" class="empty-cell">평가 결과를 불러오는 중입니다.</td></tr></tbody></table></div>
+            <div class="panel-footer"><span>종합점수 = CII 50% + FSI 50% · 원문 검증 후 변경될 수 있습니다.</span><button class="text-button" data-view="methodology">종합점수 산식 보기 <span aria-hidden="true">→</span></button></div>
           </article>
         </div>
 
         <section class="asset-ranking-section" aria-labelledby="asset-ranking-title">
-          <div class="section-heading"><div><div class="section-kicker">SIZE GROUPS</div><h2 id="asset-ranking-title">대·중·소 규모별 기업 순위</h2><p>2024·2025년 평균 총자산으로 나눈 평가용 구간입니다. 법적 대기업·중소기업 지정과 다릅니다.</p></div><button class="text-button" data-view="fsi">현재 재무체력 전체 보기 →</button></div>
+          <div class="section-heading"><div><div class="section-kicker">SIZE GROUPS</div><h2 id="asset-ranking-title">대·중·소 규모별 종합점수 순위</h2><p>2024·2025년 평균 총자산으로 나눈 평가용 구간입니다. 법적 대기업·중소기업 지정과 다릅니다.</p></div><button class="text-button" data-view="methodology">종합점수 계산법 보기 →</button></div>
           <div id="asset-group-rankings" class="asset-group-grid"><div class="panel empty-state">규모별 자료를 확인하고 있습니다.</div></div>
         </section>
 
@@ -117,15 +114,6 @@
         <div class="coverage-strip"><div class="coverage-title"><svg class="icon"><use href="#icon-database"/></svg><strong>데이터의 범위도<br>평가의 일부입니다.</strong></div><div id="coverage-summary" class="coverage-summary">수집 대상, 확보 자료, 평가 가능 범위를 확인하고 있습니다.</div><button class="button button-secondary button-small" data-view="data">수집·품질 현황 <svg class="icon"><use href="#icon-arrow"/></svg></button></div>
 
         <div class="method-teaser"><span class="section-kicker">OUR METHODOLOGY</span><h2>모든 점수에는<br>확인할 수 있는 근거가 있습니다.</h2><p>성장성, 수익성, 재무안정성, 현금창출.<br>지표의 산식부터 비교집단, 결측값 처리까지 공개합니다.</p><button class="button button-dark" data-view="methodology">평가 방법 읽기 <svg class="icon"><use href="#icon-arrow-up"/></svg></button><div class="method-teaser-art" aria-hidden="true"><div><span>성장성</span><i style="--bar-size:82%"></i></div><div><span>수익성</span><i style="--bar-size:65%"></i></div><div><span>재무안정성</span><i style="--bar-size:73%"></i></div><div><span>현금창출</span><i style="--bar-size:49%"></i></div><small>평가 차원의 구성 예시 · 기업 점수 아님</small></div></div>
-      </section>
-
-      <section id="view-rankings" class="view" aria-labelledby="rankings-title" hidden>
-        <div class="page-heading"><div><div class="eyebrow">LEGACY REFERENCE · 2024→2025</div><h1 id="rankings-title">기존 참고평가<span class="heading-period">.</span></h1><p class="page-description">2024년 대비 2025년 1년 참고평가입니다. 3년 CII·현재 FSI와 별개이며 공식 순위가 아닙니다.</p></div><button id="export-csv" class="button button-secondary"><svg class="icon"><use href="#icon-download"/></svg>CSV 다운로드</button></div>
-        <div class="ranking-tabs" id="ranking-tabs" aria-label="평가 부문"><button class="ranking-tab is-active" data-ranking="overall">종합 참고</button><button class="ranking-tab" data-ranking="growth">성장성</button><button class="ranking-tab" data-ranking="profitability">수익성</button><button class="ranking-tab" data-ranking="stability">재무안정성</button><button class="ranking-tab" data-ranking="cash">현금창출</button><button class="ranking-tab" data-ranking="improvement">전년 개선 참고</button></div>
-        <div class="panel filter-panel"><div class="filter-top"><label class="search-field" for="rank-search"><svg class="icon"><use href="#icon-search"/></svg><input id="rank-search" type="search" placeholder="기업명 또는 종목코드 검색" autocomplete="off"></label><button id="reset-filters" class="text-button"><svg class="icon"><use href="#icon-refresh"/></svg>필터 초기화</button></div><div class="filter-grid"><label>시장<select id="market-filter"><option value="all">전체 시장</option><option value="KOSPI">코스피</option><option value="KOSDAQ">코스닥</option><option value="KONEX">코넥스</option><option value="unknown">시장 미확인</option></select></label><label>산업<select id="industry-filter"><option value="all">전체 산업</option></select></label><label>자산 규모<select id="size-filter"><option value="all">전체 규모</option></select></label><label>평가 상태<select id="quality-filter"><option value="all">전체 상태</option><option value="scored">평가 가능</option><option value="unscored">평가 보류</option></select></label><label>정렬 지표<select id="ranking-type"><option value="overall">종합평가</option><option value="growth">성장성</option><option value="profitability">수익성</option><option value="stability">재무안정성</option><option value="cash">현금창출</option><option value="improvement">경영개선</option></select></label></div></div>
-        <div class="table-toolbar"><p id="ranking-count" aria-live="polite">기업 목록을 불러오는 중입니다.</p><span class="small-muted">기업명을 선택하면 재무정보와 산출 근거를 볼 수 있습니다.</span></div>
-        <div class="panel ranking-panel"><div class="table-scroll"><table id="ranking-table" class="ranking-table"><thead><tr><th scope="col"><button data-sort="rank">순위 <span>↕</span></button></th><th scope="col"><button data-sort="name">기업명 <span>↕</span></button></th><th scope="col">시장 · 산업</th><th scope="col" class="number"><button data-sort="overall">종합 <span>↕</span></button></th><th scope="col" class="number"><button data-sort="growth">성장 <span>↕</span></button></th><th scope="col" class="number"><button data-sort="profitability">수익 <span>↕</span></button></th><th scope="col" class="number"><button data-sort="stability">안정 <span>↕</span></button></th><th scope="col" class="number"><button data-sort="cash">현금 <span>↕</span></button></th><th scope="col" class="number"><button data-sort="improvement">개선 <span>↕</span></button></th><th scope="col" class="center">비교</th></tr></thead><tbody id="ranking-body"><tr><td colspan="10" class="empty-cell">자료를 불러오는 중입니다.</td></tr></tbody></table></div><div class="table-bottom"><label class="page-size-label">페이지당 <select id="page-size" aria-label="페이지당 기업 수"><option value="25">25개</option><option value="50">50개</option><option value="100">100개</option></select></label><nav id="pagination" class="pagination" aria-label="순위표 페이지"></nav></div></div>
-        <p class="fine-print"><svg class="icon"><use href="#icon-info"/></svg>‘—’는 미확보 또는 평가 불가 지표입니다. 서로 다른 비교집단의 점수는 각 집단에서의 상대적 성과를 뜻합니다.</p>
       </section>
 
       <section id="view-insights" class="view" aria-labelledby="insights-title" hidden>
@@ -139,7 +127,7 @@
       <section id="view-compare" class="view" aria-labelledby="compare-title" hidden>
         <div class="page-heading"><div><div class="eyebrow">SIDE BY SIDE</div><h1 id="compare-title">기업 맞대결<span class="heading-period">.</span></h1><p class="page-description">숫자를 나란히 놓으면 차이가 선명해집니다.</p></div><span class="badge badge-neutral">최대 3개 기업 비교</span></div>
         <div class="panel compare-selector"><label for="compare-search">비교할 기업을 찾아보세요</label><div class="compare-search-wrap"><div class="search-field"><svg class="icon"><use href="#icon-search"/></svg><input id="compare-search" type="search" placeholder="기업명 또는 종목코드" autocomplete="off" aria-controls="compare-suggestions" aria-expanded="false"></div><div id="compare-suggestions" class="search-suggestions" role="listbox" aria-label="기업 검색 결과" hidden></div></div><div id="compare-chips" class="compare-chips" aria-live="polite"></div></div>
-        <div id="comparison-content"><div id="comparison-empty" class="empty-state compare-empty"><div class="compare-illustration" aria-hidden="true"><span><i></i><i></i><i></i></span><b>vs</b><span><i></i><i></i><i></i></span></div><h2>두 기업의 경영을 함께 읽어보세요.</h2><p>기업을 선택하면 평가 부문별 점수와 재무지표,<br>공시자료의 범위를 한눈에 비교할 수 있습니다.</p><button class="button button-dark" data-view="rankings">순위에서 기업 찾기 <svg class="icon"><use href="#icon-arrow"/></svg></button></div></div>
+        <div id="comparison-content"><div id="comparison-empty" class="empty-state compare-empty"><div class="compare-illustration" aria-hidden="true"><span><i></i><i></i><i></i></span><b>vs</b><span><i></i><i></i><i></i></span></div><h2>두 기업의 경영을 함께 읽어보세요.</h2><p>기업을 선택하면 평가 부문별 점수와 재무지표,<br>공시자료의 범위를 한눈에 비교할 수 있습니다.</p><button class="button button-dark" data-view="improvement">모멘텀 지수에서 기업 찾기 <svg class="icon"><use href="#icon-arrow"/></svg></button></div></div>
       </section>
 
       <section id="view-methodology" class="view" aria-labelledby="methodology-title" hidden>
@@ -157,13 +145,13 @@
       </section>
 
       <section id="view-improvement" class="view" aria-labelledby="improvement-title" hidden>
-        <div class="page-heading"><div><div class="eyebrow">CORPORATE IMPROVEMENT INDEX · 2022~2025</div><h1 id="improvement-title">모멘텀 랭킹</h1><p class="page-description">지난 3년간 얼마나 좋아졌는가? 2022~2025년 실제 변화로 산출한 모멘텀 지수(CII) 순위를 공개합니다. 원문 검증 후 달라질 수 있습니다. 평가 보류 기업도 검색할 수 있습니다.</p></div></div>
+        <div class="page-heading"><div><div class="eyebrow">CORPORATE IMPROVEMENT INDEX · 2022~2025</div><h1 id="improvement-title">모멘텀 지수(CII)</h1><p class="page-description">지난 3년간 얼마나 좋아졌는가? 2022~2025년 실제 변화로 산출한 모멘텀 지수(CII) 순위를 공개합니다. 원문 검증 후 달라질 수 있습니다. 평가 보류 기업도 검색할 수 있습니다.</p></div></div>
         <div id="improvement-status" class="notice">평가자료를 확인하고 있습니다.</div>
         <div class="panel filter-panel"><div class="filter-top"><label class="search-field" for="cii-search"><svg class="icon"><use href="#icon-search"/></svg><input id="cii-search" type="search" placeholder="저장된 상장 후보명 또는 종목코드 검색" autocomplete="off"></label></div><div class="filter-grid"><label>시장<select id="cii-market"><option value="all">전체 시장</option><option>코스피</option><option>코스닥</option></select></label><label>업종<select id="cii-industry"><option value="all">전체 업종</option></select></label><label>자산 규모<select id="cii-size"><option value="all">전체 규모</option></select></label><label>평가연도<select id="cii-year" disabled><option value="2025">2025년 기준 · 2022~2025</option></select></label><label>기업 유형<select id="cii-type"><option value="all">전체 유형</option></select></label><label>모멘텀 지수 최소<input id="cii-min" type="number" min="0" max="100" step="1" placeholder="0점"></label><label>모멘텀 지수 최대<input id="cii-max" type="number" min="0" max="100" step="1" placeholder="100점"></label></div></div>
         <div id="improvement-ranking" class="panel"></div>
       </section>
       <section id="view-fsi" class="view" aria-labelledby="fsi-title" hidden>
-        <div class="page-heading"><div><div class="eyebrow">CURRENT FINANCIAL STRENGTH · 2025</div><h1 id="fsi-title">재무체력 지수(FSI)</h1><p class="page-description">지금 얼마나 탄탄한가? 2025년 수익성·재무안정성·현금창출력·자산 효율을 평가합니다. 모멘텀 지수와 합산하지 않습니다.</p></div><a class="button button-secondary" href="./improvement_export.xlsx" download>원자료 Excel</a></div>
+        <div class="page-heading"><div><div class="eyebrow">CURRENT FINANCIAL STRENGTH · 2025</div><h1 id="fsi-title">재무체력 지수(FSI)</h1><p class="page-description">지금 얼마나 탄탄한가? 2025년 수익성·재무안정성·현금창출력·자산 효율을 평가합니다. CII와는 별도 순위를 제공하며 종합 현황의 50:50 점수에도 사용합니다.</p></div><a class="button button-secondary" href="./improvement_export.xlsx" download>원자료 Excel</a></div>
         <div id="fsi-status" class="notice">평가자료를 확인하고 있습니다.</div>
         <div class="panel filter-panel"><div class="filter-grid"><label>시장<select id="fsi-market"><option value="all">전체 시장</option><option>코스피</option><option>코스닥</option></select></label><label>업종<select id="fsi-industry"><option value="all">전체 업종</option></select></label><label>자산 규모<select id="fsi-size"><option value="all">전체 규모</option></select></label><label>기업명·종목코드<input id="fsi-search" type="search" placeholder="기업 찾기"></label></div></div>
         <div id="fsi-ranking" class="panel"></div>
