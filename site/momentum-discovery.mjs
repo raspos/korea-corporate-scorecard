@@ -5,7 +5,7 @@ export function momentumReason(row, isOfficial) {
   if (!row.eligible) return '필수 재무자료 또는 평가대상 확인 전';
   if (!row.sourceYears?.includes(2022)) return '2022년 원자료 미확보';
   if (row.cii?.coverage < 100) return 'CII 지표 미충족';
-  if (!isOfficial) return 'CII 탐색점수 · 공시 원문·정정 검증 전';
+  if (Number.isFinite(row.cii?.score)) return isOfficial ? '검증 완료' : '잠정 순위 · 공시 원문·정정 검증 전';
   return '평가 보류';
 }
 

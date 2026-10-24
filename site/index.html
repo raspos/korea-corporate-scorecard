@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Inter:wght@400;500;600;650;700;750&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261023momentum1">
-  <script src="app-dashboard.js?v=20261023momentum2" type="module" defer></script>
+  <script src="app-dashboard.js?v=20261024provisional1" type="module" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#app-main">본문으로 이동</a>
@@ -85,7 +85,7 @@
           <button class="text-button" data-view="methodology">평가는 어떻게 하나요? <svg class="icon"><use href="#icon-arrow-up"/></svg></button>
         </div>
 
-        <div class="assessment-note"><svg class="icon"><use href="#icon-info"/></svg><p><strong>공식 발표 전인 이유:</strong> CII 탐색점수는 산출했지만 기업별 공시 원문과 정정공시, 연결·별도 재무제표의 일관성, 시장·업종 분류 및 이상치를 아직 모두 확인하지 않았습니다. 검증이 끝나기 전까지 공식 순위와 기업 유형은 발표하지 않습니다. 기존 2024~2025 참고평가는 별도 메뉴에 보존했습니다.</p><button class="text-button" data-view="data">수집 현황 <span aria-hidden="true">→</span></button></div>
+        <div class="assessment-note"><svg class="icon"><use href="#icon-info"/></svg><p><strong>잠정 순위 공개:</strong> 2022~2025년 CII와 2025년 FSI를 충족한 기업의 순위·유형을 먼저 공개합니다. 기업별 공시 원문·정정공시, 연결·별도 재무제표, 시장·업종 분류와 이상치 검증은 진행 전이며 결과가 바뀔 수 있습니다. 기존 2024~2025 참고평가는 별도 메뉴에 보존했습니다.</p><button class="text-button" data-view="data">수집 현황 <span aria-hidden="true">→</span></button></div>
 
         <div class="period-row"><div class="period-tabs" aria-label="평가 기간"><button class="period-tab is-active" data-period="annual" aria-pressed="true">3년 모멘텀 평가 <span>2022~2025</span></button><button class="period-tab" data-period="quarterly" disabled title="최신 분기자료 수집 후 제공됩니다">2026 분기 참고 <span>수집 전</span></button></div><span class="small-muted">2026년 수치는 2025년 연간 평가에 포함하지 않습니다.</span></div>
 
@@ -93,7 +93,7 @@
 
         <div class="dashboard-grid">
           <article class="panel landscape-panel">
-            <div class="panel-heading"><div><div class="section-kicker">THE BIG PICTURE</div><h2>개선 속도와 현재 재무체력, 두 축으로 읽습니다.</h2><p>가로축은 재무체력 지수(FSI), 세로축은 모멘텀 지수(CII)입니다.</p></div><span class="badge badge-neutral">정식 두 지수 확보 기업만</span></div>
+            <div class="panel-heading"><div><div class="section-kicker">THE BIG PICTURE</div><h2>개선 속도와 현재 재무체력, 두 축으로 읽습니다.</h2><p>가로축은 재무체력 지수(FSI), 세로축은 모멘텀 지수(CII)입니다.</p></div><span class="badge badge-neutral">완전지표 기업 · 잠정 분류</span></div>
             <div class="chart-legend"><span><i class="legend-dot legend-teal"></i>성장 우량</span><span><i class="legend-dot legend-navy"></i>안정형 우량</span><span><i class="legend-dot legend-orange"></i>턴어라운드</span><span><i class="legend-dot legend-gray"></i>경쟁력 약화</span></div>
             <div class="scatter-container"><div id="scatter-chart" class="scatter-chart" aria-label="모멘텀 지수와 재무체력 지수 분포"><div class="chart-loading">분포를 확인하고 있습니다.</div></div><div id="scatter-tooltip" class="chart-tooltip" role="tooltip" hidden></div></div>
             <div class="chart-caption"><svg class="icon"><use href="#icon-info"/></svg><span>각 점은 하나의 기업입니다. 점을 선택하면 자료 충족률과 평가 근거를 확인할 수 있습니다.</span></div>
@@ -102,7 +102,7 @@
           <article class="panel leader-panel">
             <div class="panel-heading"><div><div class="section-kicker">PERFORMANCE LEADERS</div><h2>모멘텀 지수 상위 기업</h2></div><button class="icon-button" data-view="improvement" aria-label="모멘텀 랭킹 전체 보기"><svg class="icon"><use href="#icon-arrow-up"/></svg></button></div>
             <div class="leader-table-wrap"><table class="leader-table"><thead><tr><th scope="col">순위</th><th scope="col">기업</th><th scope="col">시장</th><th scope="col">점수</th><th scope="col">충족률</th><th scope="col">비교</th></tr></thead><tbody id="overview-ranking"><tr><td colspan="6" class="empty-cell">평가 결과를 불러오는 중입니다.</td></tr></tbody></table></div>
-            <div class="panel-footer"><span>자료·검증 충족 기업만 표시합니다.</span><button class="text-button" data-view="improvement">모멘텀 랭킹 보기 <span aria-hidden="true">→</span></button></div>
+            <div class="panel-footer"><span>완전지표 기업의 잠정 순위입니다. 원문 검증 후 변경될 수 있습니다.</span><button class="text-button" data-view="improvement">모멘텀 랭킹 보기 <span aria-hidden="true">→</span></button></div>
           </article>
         </div>
 
@@ -157,7 +157,7 @@
       </section>
 
       <section id="view-improvement" class="view" aria-labelledby="improvement-title" hidden>
-        <div class="page-heading"><div><div class="eyebrow">CORPORATE IMPROVEMENT INDEX · 2022~2025</div><h1 id="improvement-title">모멘텀 랭킹</h1><p class="page-description">지난 3년간 얼마나 좋아졌는가? 2022~2025년 실제 변화와 공시 원문을 검증한 뒤 모멘텀 지수(CII) 순위를 공개합니다. 평가 보류 기업도 검색할 수 있습니다.</p></div></div>
+        <div class="page-heading"><div><div class="eyebrow">CORPORATE IMPROVEMENT INDEX · 2022~2025</div><h1 id="improvement-title">모멘텀 랭킹</h1><p class="page-description">지난 3년간 얼마나 좋아졌는가? 2022~2025년 실제 변화로 산출한 모멘텀 지수(CII) 잠정 순위를 공개합니다. 원문 검증 후 달라질 수 있습니다. 평가 보류 기업도 검색할 수 있습니다.</p></div></div>
         <div id="improvement-status" class="notice">평가자료를 확인하고 있습니다.</div>
         <div class="panel filter-panel"><div class="filter-top"><label class="search-field" for="cii-search"><svg class="icon"><use href="#icon-search"/></svg><input id="cii-search" type="search" placeholder="저장된 상장 후보명 또는 종목코드 검색" autocomplete="off"></label></div><div class="filter-grid"><label>시장<select id="cii-market"><option value="all">전체 시장</option><option>코스피</option><option>코스닥</option></select></label><label>업종<select id="cii-industry"><option value="all">전체 업종</option></select></label><label>자산 규모<select id="cii-size"><option value="all">전체 규모</option></select></label><label>평가연도<select id="cii-year" disabled><option value="2025">2025년 기준 · 2022~2025</option></select></label><label>기업 유형<select id="cii-type"><option value="all">전체 유형</option></select></label><label>모멘텀 지수 최소<input id="cii-min" type="number" min="0" max="100" step="1" placeholder="0점"></label><label>모멘텀 지수 최대<input id="cii-max" type="number" min="0" max="100" step="1" placeholder="100점"></label></div></div>
         <div id="improvement-ranking" class="panel"></div>
